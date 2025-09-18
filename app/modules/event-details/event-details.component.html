@@ -30,7 +30,7 @@
           <!-- 🔹 Client Dropdown -->
           <mat-form-field appearance="fill" class="client-select">
             <mat-label>Select Client</mat-label>
-            <mat-select [(value)]="selectedClient" (selectionChange)="onClientChange($event)">
+            <mat-select [(value)]="selectedClient" (selectionChange)="onClientChange()">
               <mat-option *ngFor="let client of clients" [value]="client">
                 {{ client }}
               </mat-option>

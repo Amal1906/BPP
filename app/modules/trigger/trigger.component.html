@@ -6,7 +6,6 @@
     <select
       id="triggerOptions"
       [(ngModel)]="selectedOption"
-      class="form-control"
     >
       <option value="" disabled>Select an option</option>
       <option *ngFor="let option of options" [value]="option">
@@ -15,11 +14,25 @@
     </select>
   </div>
 
-  <button class="btn btn-primary mt-3" (click)="triggerStepper()">
+  <div class="form-group">
+    <label for="clientOptions">Select Client:</label>
+    <select
+      id="clientOptions"
+      [(ngModel)]="selectedClient"
+    >
+      <option value="" disabled>Select a client</option>
+      <option *ngFor="let client of clients" [value]="client">
+        {{ client }}
+      </option>
+    </select>
+  </div>
+
+  <button (click)="triggerStepper()" [disabled]="!selectedOption || !selectedClient">
     Trigger
   </button>
 
-  <div *ngIf="selectedOption" class="mt-3">
-    <p><strong>Selected:</strong> {{ selectedOption }}</p>
+  <div *ngIf="selectedOption || selectedClient" class="selection-display">
+    <p *ngIf="selectedOption"><strong>Process:</strong> {{ selectedOption }}</p>
+    <p *ngIf="selectedClient"><strong>Client:</strong> {{ selectedClient }}</p>
   </div>
 </div>

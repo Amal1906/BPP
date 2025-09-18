@@ -42,9 +42,11 @@ export class EventDetailsActionComponent {
    */
   routeToView(): void {
     console.log("Navigating to step details for process_ref_id:", this.process_ref_id);
+    const workType = this.params.data.process_type || this.params.data.work_type || '';
       this.router.navigate(['/layout/details/step-details/'], {
         queryParams: {
-          process_ref_id: this.process_ref_id
+          process_ref_id: this.process_ref_id,
+          work_type: workType
         }
       });
   }

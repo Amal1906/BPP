@@ -1,47 +1,62 @@
 @import "../../../assets/css/variable/variable";
 
 .sidebar {
-  min-height: 95vh;
+  min-height: calc(100vh - 80px);
   width: 70px;
-  padding: 6px 14px;
-  z-index: 3;
-  background-color: #f5f8ff;
-  transition: all 0.5s ease;
+  padding: 1rem 0.875rem;
+  z-index: 100;
+  background: $color-white;
+  border-right: 1px solid $color-gray-200;
+  transition: all $transition-slow;
   position: fixed !important;
-  margin-top: 30px;
+  margin-top: 80px;
   overflow-x: hidden;
   left: 0;
+  box-shadow: $shadow-sm;
 
   &.open {
     width: 250px;
+    box-shadow: $shadow-lg;
   }
 
   .logo-details {
-    color: $color-white;
+    color: $text-primary;
     height: 60px;
     display: flex;
     align-items: center;
     position: relative;
+    margin-bottom: 1rem;
+    
     #btn {
       position: absolute;
-      color: $color-navyblue;
+      color: $primary-purple;
       top: 50%;
-      right: 8px;
+      right: 12px;
       transform: translateY(-50%);
-      font-size: 25px;
+      font-size: 1.5rem;
       text-align: center;
       cursor: pointer;
-      transition: all 0.5s ease;
+      transition: all $transition-normal;
+      padding: 0.5rem;
+      border-radius: $border-radius-md;
+      
+      &:hover {
+        background: rgba($primary-purple, 0.1);
+        color: $primary-purple-dark;
+        transform: translateY(-50%) scale(1.1);
+      }
     }
   }
 
   ul.nav-list {
-    margin-left: -36px;
-    padding-bottom: 60px;
+    margin: 0;
+    padding: 0 0 2rem 0;
+    list-style: none;
 
     li {
-      margin: 4px 0;
+      margin: 0.25rem 0;
       list-style: none;
+      position: relative;
 
       a {
         display: flex;
@@ -49,68 +64,87 @@
         width: 100%;
         align-items: center;
         position: relative;
-        transition: all 0.5s ease;
-        z-index: 10;
-        gap: 3px;
+        transition: all $transition-normal;
+        z-index: 2;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: $border-radius-lg;
+        text-decoration: none;
+        margin: 0.25rem 0;
+        cursor: pointer;
 
-        &::after {
-          content: '';
-          position: absolute;
-          width: 40%;
-          height: 100%;
-          transform: scaleX(0);
-          background-color: $color-light-blue;
-
-          border-radius: 3px;
-          transition: transform 0.3s ease-in-out;
-          transform-origin: left;
-          z-index: -1;
-        }
-
-        &:hover::after {
-          transform: scaleX(3);
+        &:hover {
+          background: rgba($primary-purple, 0.1);
+          transform: translateX(4px);
+          
+          i {
+            color: $primary-purple;
+            transform: scale(1.1);
+          }
+          
+          .link-name {
+            color: $primary-purple;
+          }
         }
 
         .link-name {
-          color: $color-navyblue;
-          font-size: 15px;
+          color: $text-primary;
+          font-size: 0.875rem;
           font-weight: 600;
           white-space: nowrap;
           pointer-events: none;
           opacity: 1;
-          transition: all 0.3s ease;
-          width: 100px;
+          transition: all $transition-normal;
+          flex: 1;
         }
       }
+      
       i {
-        color: $color-navyblue;
-        height: 60px;
-        line-height: 60px;
-        font-size: 22px;
-        font-weight: 600px;
-        min-width: 57px;
+        color: $text-secondary;
+        font-size: 1.25rem;
+        min-width: 1.5rem;
         text-align: center;
-        transition: color 0.3s ease;
+        transition: all $transition-normal;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
+    }
+  }
+  
+  &.closed {
+    ul.nav-list li a .link-name {
+      opacity: 0;
+      transform: translateX(-10px);
     }
   }
 }
 
 .tooltip {
   position: fixed;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgb(0, 153, 255) 100%);  
+  background: $purple-gradient;
   color: $color-white; 
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 13px;
+  padding: 0.5rem 0.75rem;
+  border-radius: $border-radius-md;
+  font-size: 0.75rem;
   font-weight: 600;
   white-space: nowrap;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-lg;
   pointer-events: none;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: all $transition-normal;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -4px;
+    transform: translateY(-50%);
+    border: 4px solid transparent;
+    border-right-color: $primary-purple;
+  }
 }
 
 .sidebar.closed .tooltip {

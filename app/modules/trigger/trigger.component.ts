@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../service/data.service';
-import { end } from '@popperjs/core';
 
 @Component({
   selector: 'app-trigger',
@@ -10,6 +9,7 @@ import { end } from '@popperjs/core';
 })
 export class TriggerComponent {
   selectedOption: string = '';
+  selectedClient: string = '';
 
   options: string[] = [
     'Policy_Checking_traditional',
@@ -18,13 +18,48 @@ export class TriggerComponent {
     'Carrier_Download',
     'New_Renewal'
   ];
+  
+  clients: string[] = [
+    'Wellhouse',
+    'Symphony'
+  ];
 
   constructor(private dataService: DataService, private router: Router) {}
 
- 
   triggerStepper() {
-  if (!this.selectedOption) {
-    console.warn('Please select an option first.');
+    if (!this.selectedOption || !this.selectedClient) {
+      console.warn('Please select both process and client.');
+      return;
+    }
+
+    // Get current date for start and end date
+    const currentDate = new Date();
+    const startDate = this.formatDate(currentDate);
+    const endDate = this.formatDate(currentDate);
+
+    // Save state
+    this.dataService.setDashboardState(startDate, endDate, this.selectedClient);
+
+    // Navigate to details page with query params
+    this.router.navigate(['/layout/details'], {
+      queryParams: {
+        process_type: this.selectedOption,
+        client: this.selectedClient,
+        start_date: startDate,
+        end_date: endDate,
+        success: '1' // Assuming successful trigger
+      }
+    });
+  }
+
+  private formatDate(date: Date): string {
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${month}-${day}-${year}`;
+  }
+}
+
     return;
   }
 

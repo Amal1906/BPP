@@ -55,6 +55,8 @@ export class EventDetailsComponent implements OnInit {
   isLoading: boolean = false;
   currentDate = new Date();
   searchTerm: string = '';
+  clients: string[] = [];
+  selectedClient: string = '';
   public noRowsTemplate = `<span class="ag-overlay-no-rows-center">No data found</span>`;
 
   dateRange = new FormGroup({
@@ -144,11 +146,19 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit(): void {
   this.titleService.setTitle('Transaction Dashboard');
 
+  // Initialize clients list
+  this.clients = ['Wellhouse', 'Symphony'];
+
   this.route.queryParams.subscribe(params => {
     const startParam = params['start_date'];
     const endParam = params['end_date'];
     const client = params['client'];
     const processType = params['process_type'];
+    
+    // Set selected client from query params
+    if (client) {
+      this.selectedClient = client;
+    }
 
     const successFlag = params['success'] === '1';
     const failedFlag = params['success'] === '0';
@@ -288,6 +298,11 @@ export class EventDetailsComponent implements OnInit {
     this.clearSearch();
     this.gridApi.setFilterModel(null);
     this.filteredRowData = [];
+    this.loadDashboardData();
+  }
+  
+  onClientChange(): void {
+    // Reload data when client changes
     this.loadDashboardData();
   }
 

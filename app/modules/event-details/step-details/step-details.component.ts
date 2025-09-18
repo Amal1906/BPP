@@ -10,10 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../service/data.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormatDataTimePipe } from '../../../data/pipe/format-date-time.pipe';
+import { StepperComponent } from './stepper/stepper.component';
+
 @Component({
   selector: 'app-tenant-details',
   standalone: true,
-  imports: [NgbModule, CommonModule , ReactiveFormsModule, FormsModule, DropdownModule, LoaderComponent, FormatDataTimePipe],
+  imports: [NgbModule, CommonModule , ReactiveFormsModule, FormsModule, DropdownModule, LoaderComponent, FormatDataTimePipe, StepperComponent],
   providers: [
     FormatDataTimePipe, DatePipe
   ],
@@ -28,6 +30,7 @@ export class StepDetailsComponent implements OnInit {
 
   processRefId: string = ''; 
   steps: any;
+  workType: string = '';
 
   constructor(private router: Router,
     private route: ActivatedRoute, private dataService: DataService, private toastr: ToastrService, private formatDateTimePipe: FormatDataTimePipe) { }
@@ -39,6 +42,7 @@ export class StepDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       this.processRefId = params.get('process_ref_id') || '';
+      this.workType = params.get('work_type') || '';
       if (this.processRefId) {
         this.loadSteps();
       } 
