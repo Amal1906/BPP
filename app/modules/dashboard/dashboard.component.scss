@@ -1,0 +1,352 @@
+// @import './assets/css/style.scss';
+
+.status-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.status-item {
+  cursor: pointer;
+  text-align: center;
+  margin: 15px;
+}
+
+.status-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 15px solid transparent;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  font-size: 1.9em;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.status-circle:hover {
+  transform: scale(1.1);
+}
+
+/* Different colors for each circle */
+.circle-received {
+  border-color: skyblue;
+}
+
+.circle-cleared {
+  border-color: green;
+}
+
+.circle-firm-decline {
+  border-color: red;
+}
+
+.circle-soft-decline {
+  border-color: yellow;
+}
+
+.circle-uw-triage {
+  border-color: blue;
+  /* Blue for UW Triage */
+}
+
+.circle-review {
+  border-color: greenyellow;
+  /* Green for Review */
+}
+
+.circle-no-attachment {
+  border-color: orange;
+  /* Orange for No Attachment */
+}
+
+.circle-no-sov {
+  border-color: rebeccapurple;
+  /* Red for No SOV */
+}
+
+.status-label {
+  font-size: 1.5em;
+  margin-top: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .status-circle {
+    width: 80px;
+    height: 80px;
+    font-size: 1.2em;
+  }
+
+  .status-label {
+    font-size: 1em;
+  }
+}
+
+
+.dp-hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+
+.custom-day.range,
+.custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+
+
+
+
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .card-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  .big-card {
+    padding: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 12px;
+    color: white;
+    background: #021A53 url('../../../assets/images/header-bg.jpg') no-repeat center;
+    font-size: 18px;
+    text-align: center;
+    width: 95%;
+    border: 1px solid transparent;
+
+    height: 100%;
+    /* Ensure cards take up full available height */
+    display: flex;
+    /* Flex layout for vertical centering */
+    flex-direction: column;
+    justify-content: space-between;
+    /* Space content evenly within the card */
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 1000px) {
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .big-card .mat-card-title,
+  .big-card .mat-card-content {
+    flex: 1;
+    /* Make title and content equally flexible */
+  }
+
+  mat-card-title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  ::ng-deep mat-grid-tile .mat-grid-tile-content {
+    align-items: start !important;
+    padding-top: 5px;
+  }
+
+  mat-card-content {
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+
+  mat-grid-list {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  mat-grid-tile {
+    cursor: pointer;
+    padding: 30px;
+    min-height: 150px;
+  }
+
+  .charts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    .chart-item {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      border: 2px solid transparent;
+    }
+  }
+
+
+  // .tasks-category-tab{
+  //     border: 1px solid #DFE3EC;
+  //     border-radius: 8px;
+  //     overflow: hidden;
+  //     a{
+  //         margin: 0;
+  //         padding: 10px 16px;
+  //         min-height: 40px;
+  //         color: #414E6C;
+  //         font-size: 14px;
+  //         font-weight: 600;
+  //         line-height: 20px;
+  //         border-left: 1px solid #DFE3EC;
+  //         text-align: center;
+  //         display: inline-block;
+  //         &:first-child{
+  //             border-left: 0;
+  //         }
+  //     }
+  //     a.active{
+  //         color: white;
+  //         background: #005AFF;
+  //         transition: 0.2s ease-in-out;
+  //     }
+  //     a.active:hover{
+  //         color: white;
+  //         background:#021a53;
+  //         transition: 0.2s ease-in-out;
+  //     }
+  // }
+
+
+  .custome-table {
+    width: 64%;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    margin-top: 20px;
+
+    @media (max-width: 768px) {
+      .ag-theme-quartz {
+        font-size: 12px;
+      }
+    }
+  }
+
+
+  .tasks-category-tab {
+    border: 1px solid #DFE3EC;
+    border-radius: 8px;
+    overflow: hidden;
+
+    a {
+      margin: 0;
+      padding: 10px 16px;
+      min-height: 40px;
+      color: #414E6C;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      border-left: 1px solid #DFE3EC;
+      text-align: center;
+      display: inline-block;
+
+      &:first-child {
+        border-left: 0;
+      }
+    }
+
+    a.active {
+      color: white;
+      background: #005AFF;
+      transition: 0.2s ease-in-out;
+    }
+
+    a.active:hover {
+      color: white;
+      background: #021a53;
+      transition: 0.2s ease-in-out;
+    }
+  }
+
+  .button-container {
+    text-align: center;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button.active {
+    background-color: #021a53;
+    color: #ffffff;
+  }
+
+  button:hover {
+    background-color: #005AFF;
+    color: #ffffff;
+  }
+  
+  .client-selection-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  
+  .client-dropdown {
+    width: 200px;
+    
+    .mat-mdc-form-field {
+      font-size: 14px;
+    }
+    
+    .mat-mdc-select-value {
+      font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .client-selection-container {
+    .client-dropdown {
+      width: 150px;
+    }
+  }
+}
+
+}

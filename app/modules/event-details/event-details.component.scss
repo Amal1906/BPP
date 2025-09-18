@@ -1,0 +1,139 @@
+@import '../../../assets/css/style.scss';
+@import '../../../assets/css/variable/variable';
+
+.event-details {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+
+  .filter-data {
+    border: 1px solid #DFE3EC;
+    border-radius: 10px;
+  }
+}
+
+.search-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 16px;
+  border-bottom: 1px solid #DFE3EC;
+  flex-wrap: wrap;
+
+  .search-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .date-picker-container {
+    margin-left: auto;
+    min-width: 300px;
+    max-width: 350px;
+  }
+}
+
+/* Search input */
+.search-container {
+  flex: 1;
+  min-width: 200px;
+  max-width: 500px;
+
+  .search-input {
+    width: 100%;
+    padding: 0px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 50px;
+    font-size: 16px;
+    color: #6c757d;
+
+    &:focus {
+      border-color: #0A68EB;
+      outline: none;
+    }
+  }
+}
+
+/* Action buttons */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  height: 50px;
+  background-color: #fff;
+  border: 1px solid #DFE3EC;
+  border-radius: 8px;
+  color: #414E6C;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: #C3C3C3;
+    color: #333;
+  }
+
+  &:active {
+    border-color: #0A68EB;
+    background-color: #f5f5f5;
+  }
+
+  mat-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+/* 🔹 Client dropdown */
+.client-select {
+  min-width: 200px;
+  max-width: 250px;
+
+  .mat-mdc-text-field-wrapper {
+    background-color: #fff !important;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 50px;
+
+    &.mdc-text-field--focused {
+      border-color: #0A68EB;
+    }
+  }
+}
+
+.date-picker-container mat-form-field {
+  margin-left: -25px;
+  margin-top: 20px;
+
+  .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 50px;
+  }
+}
+
+.ag-grid-wrapper {
+  height: 600px;
+  width: 100%;
+
+  ag-grid-angular {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.clear-date-btn {
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  color: #999;
+  margin-top: -4px;
+  background-color: white !important;
+}
