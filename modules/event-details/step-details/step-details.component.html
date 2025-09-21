@@ -1,73 +1,152 @@
-
-
-<app-loader [isLoading]="isLoading"></app-loader>
-<div class="tenant-details header">
-  <div class="d-flex align-items-center">
-    <span class="cursor-pointer mx-1" title="Back" (click)="navigateBack()">
-      <svg width="24px" height="24px" viewBox="0 0 1024 1024" class="icon downlode-icon-svg"
-        xmlns="http://www.w3.org/2000/svg">
-        <path d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z" />
-        <path
-          d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z" />
-      </svg>
-    </span>
-    &nbsp;
-    <span class="cursor-pointer mx-2" title="Refresh" (click)="onRefresh()">
-      <svg class="downlode-icon-svg" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M27.1 14.313V5.396L24.158 8.34c-2.33-2.325-5.033-3.503-8.11-3.503C9.902 4.837 4.901 9.847 4.899 16c.001 6.152 5.003 11.158 11.15 11.16 4.276 0 9.369-2.227 10.836-8.478l.028-.122h-3.23l-.022.068c-1.078 3.242-4.138 5.421-7.613 5.421a8 8 0 0 1-5.691-2.359A7.993 7.993 0 0 1 8 16.001c0-4.438 3.611-8.049 8.05-8.049 2.069 0 3.638.58 5.924 2.573l-3.792 3.789H27.1z" />
-      </svg>
-    </span>
+<div class="ai-step-details-container">
+  <!-- Header Section -->
+  <div class="step-details-header fade-in">
+    <div class="header-actions">
+      <button class="nav-btn hover-glow" (click)="navigateBack()" matTooltip="Back to Details">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M19 12H5" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </button>
+      <button class="nav-btn hover-glow" (click)="onRefresh()" matTooltip="Refresh Data">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <polyline points="23 4 23 10 17 10" stroke="currentColor" stroke-width="2"/>
+          <polyline points="1 20 1 14 7 14" stroke="currentColor" stroke-width="2"/>
+          <path d="M20.49 9C19.9 5.5 16.9 3 13.5 3C9.8 3 6.8 5.4 6.2 8.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M3.51 15C4.1 18.5 7.1 21 10.5 21C14.2 21 17.2 18.6 17.8 15.5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="header-content">
+      <h1 class="page-title ai-gradient">
+        <svg class="title-icon" width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M22 12H18L15 21L9 3L6 12H2" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Process Step Details
+      </h1>
+      <p class="page-subtitle">Track individual process execution steps</p>
+    </div>
   </div>
-</div>
 
+  <!-- Loading State -->
+  <app-loader [isLoading]="isLoading"></app-loader>
 
-<app-stepper [workFlow]="workFlow" [loading]="isLoading"></app-stepper>
+  <!-- Stepper Component -->
+  <div class="stepper-section" *ngIf="!isLoading && workFlow.length > 0">
+    <app-stepper [workFlow]="workFlow" [loading]="isLoading"></app-stepper>
+  </div>
 
+  <!-- Steps Table -->
+  <div class="steps-container" *ngIf="!isLoading">
+    <div class="steps-card ai-card fade-in">
+      <div class="card-header">
+        <h3 class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+            <path d="M21 12C21 16.9 16.9 21 12 21S3 16.9 3 12S7.1 3 12 3S21 7.1 21 12Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          Execution Steps
+        </h3>
+        <div class="step-stats">
+          <span class="stat-item">
+            <span class="stat-value">{{steps?.length || 0}}</span>
+            <span class="stat-label">Steps</span>
+          </span>
+        </div>
+      </div>
 
-<div class="modal-body">
-  <div class="tab-section">
-    <div class="form-group form_field_wrapper custom-task-page table-responsive contact-table">
-      <table class="table custome-table my-3 table-hover table-bordered">
-        <thead class="table">
-          <tr>
-            <th width="4%">Step Name</th>
-            <th width="8%">Process Time </th>
-            <th width="3%">Status</th>
-            <th width="7%">Comments</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let step of steps">
-            <td>{{ step.step_name || '-' }}</td>
-            <td>
-               {{
-                      step.process_time
-                        ? (step.process_time
-                          | formatDateTime : "MM-dd-yyyy, HH:mm:ss")
-                        : "-"
-                    }}
-            </td>
-            <td>
-              <span>
-                <!-- {{ step.step_status || '-'}} -->
+      <div class="table-container">
+        <div class="table-wrapper">
+          <table class="ai-table">
+            <thead>
+              <tr>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 11H15" stroke="currentColor" stroke-width="2"/>
+                      <path d="M9 15H15" stroke="currentColor" stroke-width="2"/>
+                      <path d="M17 3V21L12 18L7 21V3H17Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Step Name
+                  </div>
+                </th>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                      <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Process Time
+                  </div>
+                </th>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M22 11.08V12C22 17.5 17.5 22 12 22S2 17.5 2 12S6.5 2 12 2C14.25 2 16.28 2.94 17.72 4.38" stroke="currentColor" stroke-width="2"/>
+                      <path d="M22 4L12 14.01L9 11.01" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Status
+                  </div>
+                </th>
+                <th>
+                  <div class="th-content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M21 15C21 15.5 20.5 16 20 16H4C3.5 16 3 15.5 3 15V9C3 8.5 3.5 8 4 8H20C20.5 8 21 8.5 21 9V15Z" stroke="currentColor" stroke-width="2"/>
+                      <path d="M7 12H17" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Comments
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let step of steps; let i = index" 
+                  class="table-row"
+                  [style.animation-delay]="(i * 0.1) + 's'">
+                <td class="step-name-cell">
+                  <div class="step-name-content">
+                    <div class="step-indicator" [ngClass]="getStatusBadge(step.step_status).statusClass"></div>
+                    {{ step.step_name || '-' }}
+                  </div>
+                </td>
+                <td class="time-cell">
+                  <div class="time-content">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                      <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    {{ step.process_time ? (step.process_time | formatDateTime : "MM-dd-yyyy, HH:mm:ss") : "-" }}
+                  </div>
+                </td>
+                <td class="status-cell">
                   <div class="content-badge"
-                         [ngClass]="getStatusBadge(step.step_status).statusClass"
-                         style="cursor: pointer">
-                      • {{ getStatusBadge(step.step_status).statusText }}
-                    </div>
-              </span>
-            </td>
-            <td>{{ step.comments || '-' }}</td>
-          </tr>
-          <tr *ngIf="steps.length === 0">
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-        </tbody>
-      </table>
+                       [ngClass]="getStatusBadge(step.step_status).statusClass">
+                    <div class="status-dot"></div>
+                    {{ getStatusBadge(step.step_status).statusText }}
+                  </div>
+                </td>
+                <td class="comments-cell">
+                  <div class="comments-content" [title]="step.comments || '-'">
+                    {{ step.comments || '-' }}
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="steps.length === 0" class="empty-row">
+                <td colspan="4" class="empty-cell">
+                  <div class="empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                      <path d="M8 12H16" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <p>No steps available</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

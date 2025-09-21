@@ -44,6 +44,71 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent implements OnInit {
   loading: boolean = false;
   gridCols: number = 4;
+  
+  // Metrics data for the new UI
+  metricsData = [
+    {
+      type: 'Received',
+      title: 'Received',
+      value: 0,
+      description: 'Total documents received for processing',
+      trend: 5.2,
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
+        <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
+      </svg>`
+    },
+    {
+      type: 'Policy_Checking',
+      title: 'Policy Checking',
+      value: 0,
+      description: 'Documents under policy verification',
+      trend: -2.1,
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2"/>
+        <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2"/>
+        <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+        <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+        <polyline points="10,9 9,10 8,9" stroke="currentColor" stroke-width="2"/>
+      </svg>`
+    },
+    {
+      type: 'COI',
+      title: 'Certificate of Insurance',
+      value: 0,
+      description: 'COI documents being processed',
+      trend: 8.7,
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 22S8 18 8 13V7L12 5L16 7V13C16 18 12 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2"/>
+      </svg>`
+    },
+    {
+      type: 'Carrier_Download',
+      title: 'Carrier Download',
+      value: 0,
+      description: 'Documents downloaded from carriers',
+      trend: 3.4,
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M21 15V19C21 19.5 20.5 20 20 20H4C3.5 20 3 19.5 3 19V15" stroke="currentColor" stroke-width="2"/>
+        <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+      </svg>`
+    },
+    {
+      type: 'New_Renewal',
+      title: 'New Renewal',
+      value: 0,
+      description: 'New renewal applications processed',
+      trend: 12.3,
+      icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <polyline points="23 4 23 10 17 10" stroke="currentColor" stroke-width="2"/>
+        <polyline points="1 20 1 14 7 14" stroke="currentColor" stroke-width="2"/>
+        <path d="M20.49 9C19.9 5.5 16.9 3 13.5 3C9.8 3 6.8 5.4 6.2 8.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M3.51 15C4.1 18.5 7.1 21 10.5 21C14.2 21 17.2 18.6 17.8 15.5" stroke="currentColor" stroke-width="2"/>
+      </svg>`
+    }
+  ];
 
   // counts for tiles
   receivedCount: number = 0;
@@ -167,6 +232,9 @@ export class DashboardComponent implements OnInit {
             this.coiCount = clientMetrics.COI || 0;
             this.carrierDownload = clientMetrics.Carrier_Download || 0;
             this.newRenewalCount = clientMetrics.New_Renewal || 0;
+            
+            // Update metrics data
+            this.updateMetricsData();
           } else {
             this.toastNotificationService.showError(
               res?.message || 'No data received',
@@ -189,6 +257,14 @@ export class DashboardComponent implements OnInit {
         'Invalid Dates'
       );
     }
+  }
+  
+  private updateMetricsData(): void {
+    this.metricsData[0].value = this.receivedCount;
+    this.metricsData[1].value = this.policyCheckCount;
+    this.metricsData[2].value = this.coiCount;
+    this.metricsData[3].value = this.carrierDownload;
+    this.metricsData[4].value = this.newRenewalCount;
   }
 
   goToDetails(processType: string) {

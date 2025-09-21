@@ -21,6 +21,16 @@ export class TriggerComponent {
   clients: string[] = ['Wellhouse', 'Symphony']; 
 
   constructor(private dataService: DataService, private router: Router) {}
+  
+  getProcessDescription(option: string): string {
+    const descriptions: { [key: string]: string } = {
+      'Policy Checking': 'Automated policy verification and validation process',
+      'COI': 'Certificate of Insurance processing and management',
+      'Carrier Download': 'Download and process carrier documents',
+      'New Renewal': 'Handle new policy renewals and applications'
+    };
+    return descriptions[option] || 'Process description not available';
+  }
 
   triggerStepper() {
     if (!this.selectedOption || !this.selectedClient) {
