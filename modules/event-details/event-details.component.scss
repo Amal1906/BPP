@@ -1,0 +1,351 @@
+@import '../../../assets/css/style.scss';
+@import '../../../assets/css/variable/variable';
+
+/* Main Container Styles */
+.event-details {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+
+  .filter-data {
+    border: 1px solid #DFE3EC;
+    border-radius: 10px;
+  }
+}
+
+/* Filter Controls Section */
+.search-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 16px;
+  border-bottom: 1px solid #DFE3EC;
+  flex-wrap: wrap;
+
+  /* Left-aligned search group */
+  .search-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Date picker container */
+  .date-picker-container {
+    margin-left: auto;
+    min-width: 300px;
+    max-width: 350px;
+  }
+}
+
+  
+/* Search Input Styles */
+.search-container {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 500px;
+
+  .search-input {
+    width: 100%;
+    padding: 0px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 50px;
+    font-size: 16px;
+    color: #6c757d;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #0A68EB;
+      outline: none;
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+  }
+
+  .clear-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+  }
+}
+.client-dropdown {
+  margin-top: 2px;
+  select.form-control {
+    width: 170px;     
+    height: 50px;      
+    padding: 5px 38px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+}
+
+
+/* Action Buttons */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  height: 50px;
+  background-color: #fff;
+  border: 1px solid #DFE3EC;
+  border-radius: 8px;
+  color: #414E6C;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: #C3C3C3;
+    color: #333;
+  }
+
+  &:active {
+    border-color: #0A68EB;
+    background-color: #f5f5f5;
+  }
+
+  mat-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+/* Date Picker Styles */
+
+/* Form field container */
+mat-form-field {
+  margin-left: -25px;
+  margin-top: 20px;
+  &.mat-mdc-form-field {
+    &.mat-form-field-appearance-fill {
+      .mat-mdc-text-field-wrapper {
+        background-color: rgb(255, 255, 255) !important;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        height: 50px;
+        font-size: 15px;
+        color: #6c757d;
+        max-width: 450px;
+
+        /* Focus state */
+        &.mdc-text-field--focused {
+          border-color: #0A68EB;
+        }
+
+        /* Remove default focus overlay */
+        .mat-mdc-form-field-focus-overlay {
+          display: none !important;
+        }
+
+        /* Form field content */
+        .mat-mdc-form-field-flex {
+          .mat-mdc-form-field-infix {
+            /* Label styling */
+            .mdc-floating-label {
+              color: #a7a7a7;
+
+              &.mdc-floating-label--float-above {
+                color: #0A68EB;
+              }
+            }
+
+            /* Input text color */
+            input.mat-mdc-input-element {
+              color: #7d6c6c;
+            }
+          }
+        }
+
+        /* Remove underline */
+        .mdc-line-ripple {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+/* Datepicker popup styling */
+.mat-datepicker-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  .mat-calendar {
+    background-color: white;
+
+    .mat-calendar-header {
+      background-color: #0a68eb30;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .mat-calendar-body-selected {
+      background-color: #0A68EB;
+      color: white;
+    }
+  }
+}
+
+/* Error state */
+mat-form-field.ng-invalid.ng-dirty .mat-mdc-text-field-wrapper,
+mat-form-field.ng-invalid.ng-touched .mat-mdc-text-field-wrapper {
+  border-color: red !important;
+  box-shadow: 2px 2px rgba(255, 0, 0, 0.05);
+}
+
+
+  mat-form-field.ng-invalid .mdc-floating-label {
+    color: red !important;
+  } 
+
+/* AG-Grid Wrapper */
+.ag-grid-wrapper {
+  height: 600px;
+  width: 100%;
+
+  ag-grid-angular {
+    height: 100%;
+    width: 100%;
+  }
+}
+/* Clear button styles (unchanged) */
+.clear-date-btn {
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  color: #999;
+  margin-top: -4px;
+  
+  background-color: white !important;
+}
+/* Responsive Adjustments */
+@media screen and (max-width: 1200px) {
+  .search-controls {
+    flex-wrap: nowrap;
+
+    .search-group {
+      width: 100%;
+    }
+
+    .date-picker-container {
+      margin-left: 28px;
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search-container {
+    max-width: 100%;
+  }
+
+  .action-btn {
+    padding: 10px 12px;
+    height: 46px;
+  }
+
+  .date-picker-container {
+    mat-form-field {
+      .mat-mdc-text-field-wrapper {
+        height: 46px;
+      }
+    }
+  }
+}
+
+/* Error States */
+mat-form-field.ng-invalid.ng-dirty .mat-mdc-text-field-wrapper,
+mat-form-field.ng-invalid.ng-touched .mat-mdc-text-field-wrapper {
+  border-color: red !important;
+  box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.1);
+}
+
+mat-form-field.ng-invalid .mdc-floating-label {
+  color: red !important;
+}
+
+/* Datepicker Popup */
+.mat-datepicker-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+
+  .mat-calendar {
+    background-color: white;
+
+    .mat-calendar-header {
+      background-color: rgba(10, 104, 235, 0.1);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .mat-calendar-body-selected {
+      background-color: #0A68EB;
+      color: white;
+    }
+  }
+}
+.content-badge {
+		margin: 0;
+		padding: 2px 8px;
+		line-height: 19px;
+	}	
+    .pending, .submitted, .triggered{
+        color: #B54708;
+        background: #FFFAEB;
+        border: 1px solid #FEDF89;
+      }
+
+      .active, .completed  {
+        color: #067647;
+        background: #ECFDF3;
+        border: 1px solid #ABEFC6;
+      }
+      
+      .inactive {
+        color: #FF3939;
+        background: #FDECEC;
+        border: 1px solid #faadad; 
+      }
+      
+      .cancel {
+        color: #1B1717;
+        background: #B9AFAF;
+        border: 1px solid #938787;
+      }
+      
+      .output{
+        color: #067647;
+        background: #ECFDF3;
+        border: 1px solid #ABEFC6;
+      }
+      
+     
+      .refresh {
+       color: #072260;
+       background: #a8c2ff;
+       border: 1px solid #7492da;
+      }
+
+      .succeeded{
+        color: #067647;
+        background: #ECFDF3;
+        border: 1px solid #ABEFC6;
+      }
