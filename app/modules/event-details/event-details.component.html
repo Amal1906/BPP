@@ -1,41 +1,28 @@
 <app-loader [isLoading]="isLoading"></app-loader>
-<!-- <app-stepper
-  [workFlow]="stepperFlow"
-  [loading]="isLoading">
-</app-stepper> -->
-<div class="loader-content">
-    <div class="wrapper-main event-details">
+<div class="loader-content modern-details-page">
+    <div class="wrapper-main event-details-modern">
         <div class="container-fluid">
-            <div class="filter-data">
-                <div class="search-controls">
-                    <div class="search-container">
+            <div class="filter-data-modern modern-card">
+                <div class="search-controls-modern">
+                    <div class="search-container-modern">
                         <input #InputVar type="text" class="search-input" placeholder="Search"
                             (input)="onSearch($event)" />
                     </div>
-                    <button class="action-btn" matTooltip="Clear" (click)="reset()">
+                    <button class="action-btn-modern" matTooltip="Clear" (click)="reset()">
                         <mat-icon>clear</mat-icon>
                     </button>
-                    <button class="action-btn" matTooltip="Refresh" (click)="refresh()">
+                    <button class="action-btn-modern" matTooltip="Refresh" (click)="refresh()">
                         <mat-icon>refresh</mat-icon>
                     </button>
-                    <!--    Client Dropdown -->
-                    <!-- <div class="client-dropdown">
-                        <select [(ngModel)]="selectedClient" class="form-control" (ngModelChange)="onClientChange($event)">
-                            <option value="" disabled>Select a client</option>
-                            <option *ngFor="let client of clientOptions" [value]="client">{{ client }}</option>
-                        </select>
-                    </div> -->
 
-
-
-                    <div class="date-picker-container">
-                        <mat-form-field>
+                    <div class="date-picker-container-modern">
+                        <mat-form-field class="date-field-modern">
                     <mat-label>Enter a date range</mat-label>
                     <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange" [max]="currentDate">
                       <input matStartDate placeholder="Start date" formControlName="start" (dateInput)="handleDateChange()" required>
                       <input matEndDate placeholder="End date" formControlName="end" (dateInput)="handleDateChange()" required>
                     </mat-date-range-input>
-                    <button class="clear-date-btn" matIconSuffix *ngIf="dateRange.value.start || dateRange.value.end"
+                    <button class="clear-date-btn-modern" matIconSuffix *ngIf="dateRange.value.start || dateRange.value.end"
                       (click)="clearDate()" style="margin-top: 10px;">
                       <mat-icon style="background-color: white;">clear</mat-icon>
                     </button>
@@ -44,8 +31,8 @@
                   </mat-form-field>
                     </div>
                 </div>
-                <div class="ag-grid-wrapper">
-                    <ag-grid-angular class="ag-theme-quartz" [columnDefs]="columnDefs" [rowData]="filteredRowData"
+                <div class="ag-grid-wrapper-modern">
+                    <ag-grid-angular class="ag-theme-quartz modern-grid" [columnDefs]="columnDefs" [rowData]="filteredRowData"
                         [defaultColDef]="defaultColDef" [gridOptions]="gridOptions"
                         [overlayNoRowsTemplate]="noRowsTemplate" (gridReady)="onGridReady($event)">
                     </ag-grid-angular>

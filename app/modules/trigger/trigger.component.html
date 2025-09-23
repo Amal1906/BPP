@@ -1,42 +1,68 @@
-<div class="trigger-container">
-  <h2>Trigger Page</h2>
+<div class="modern-trigger-page">
+  <div class="trigger-container-modern modern-card">
+    <div class="trigger-header">
+      <div class="trigger-icon">
+        <mat-icon>play_circle_filled</mat-icon>
+      </div>
+      <h2>Automation Trigger</h2>
+      <p class="trigger-subtitle">Select process and client to start automation</p>
+    </div>
 
-  <!-- Process Dropdown -->
-  <div class="form-group">
-    <label for="triggerOptions">Select Process:</label>
-    <select
-      id="triggerOptions"
-      [(ngModel)]="selectedOption"
-      class="form-control"
-    >
-      <option value="" disabled>Select an option</option>
-      <option *ngFor="let option of options" [value]="option">
-        {{ option }}
-      </option>
-    </select>
-  </div>
+    <div class="form-section">
+      <!-- Process Dropdown -->
+      <div class="form-group-modern">
+        <label for="triggerOptions" class="form-label-modern">
+          <mat-icon>settings</mat-icon>
+          Select Process
+        </label>
+        <select
+          id="triggerOptions"
+          [(ngModel)]="selectedOption"
+          class="form-control-modern"
+        >
+          <option value="" disabled>Choose a process type</option>
+          <option *ngFor="let option of options" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+      </div>
 
-  <!-- Client Dropdown -->
-  <div class="form-group mt-3">
-    <label for="clientOptions">Select Client:</label>
-    <select
-      id="clientOptions"
-      [(ngModel)]="selectedClient"
-      class="form-control"
-    >
-      <option value="" disabled>Select a client</option>
-      <option *ngFor="let client of clients" [value]="client">
-        {{ client }}
-      </option>
-    </select>
-  </div>
+      <!-- Client Dropdown -->
+      <div class="form-group-modern">
+        <label for="clientOptions" class="form-label-modern">
+          <mat-icon>business</mat-icon>
+          Select Client
+        </label>
+        <select
+          id="clientOptions"
+          [(ngModel)]="selectedClient"
+          class="form-control-modern"
+        >
+          <option value="" disabled>Choose a client</option>
+          <option *ngFor="let client of clients" [value]="client">
+            {{ client }}
+          </option>
+        </select>
+      </div>
+    </div>
 
-  <button class="btn btn-primary mt-3" (click)="triggerStepper()">
-    Trigger
-  </button>
+    <button class="btn-modern-trigger" (click)="triggerStepper()" [disabled]="!selectedOption || !selectedClient">
+      <mat-icon>rocket_launch</mat-icon>
+      Start Automation
+    </button>
 
-  <div *ngIf="selectedOption || selectedClient" class="mt-3">
-    <p><strong>Selected Process:</strong> {{ selectedOption }}</p>
-    <p><strong>Selected Client:</strong> {{ selectedClient }}</p>
+    <div *ngIf="selectedOption || selectedClient" class="selection-summary">
+      <div class="summary-card">
+        <h4>Current Selection</h4>
+        <div class="selection-item" *ngIf="selectedOption">
+          <mat-icon>check_circle</mat-icon>
+          <span><strong>Process:</strong> {{ selectedOption }}</span>
+        </div>
+        <div class="selection-item" *ngIf="selectedClient">
+          <mat-icon>check_circle</mat-icon>
+          <span><strong>Client:</strong> {{ selectedClient }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

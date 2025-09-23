@@ -10,11 +10,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormatDataTimePipe } from '../../../data/pipe/format-date-time.pipe';
 import { Step, StepperComponent } from '../../../shared/stepper/stepper.component';
 import { WORKFLOWS } from '../../../data/workflow.config';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-tenant-details',
   standalone: true,
-  imports: [NgbModule, CommonModule, ReactiveFormsModule, FormsModule, DropdownModule, LoaderComponent, FormatDataTimePipe, StepperComponent],
+  imports: [NgbModule, CommonModule, ReactiveFormsModule, FormsModule, DropdownModule, LoaderComponent, FormatDataTimePipe, StepperComponent, MatIconModule],
   providers: [
     FormatDataTimePipe, DatePipe
   ],
@@ -440,6 +441,31 @@ export class StepDetailsComponent implements OnInit {
     };
 
     return statusMap[normalizedStatus] || { statusText: status, statusClass: 'default' };
+  }
+
+  /**
+   * Gets the appropriate Material icon for a given status
+   * @param {string} status - The status to get icon for
+   * @returns {string} The Material icon name
+   */
+  getStatusIcon(status: string): string {
+    if (!status) {
+      return 'help_outline';
+    }
+
+    const normalizedStatus = status.toLowerCase();
+
+    const iconMap: { [key: string]: string } = {
+      'in progress': 'hourglass_empty',
+      'processing': 'hourglass_empty',
+      'completed': 'check_circle',
+      'success': 'check_circle',
+      'failed': 'error',
+      'error': 'error',
+      'pending': 'schedule',
+    };
+
+    return iconMap[normalizedStatus] || 'help_outline';
   }
 
   navigateBack() {

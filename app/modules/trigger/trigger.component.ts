@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../service/data.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-trigger',
+  standalone: true,
+  imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './trigger.component.html',
   styleUrls: ['./trigger.component.scss']
 })

@@ -1,13 +1,13 @@
-// @import '../../../styles.scss';
-
 header {
     margin: 0;
     padding: 14px 40px 14px 25px;
-    background: #021a53;
+    background: var(--gradient-secondary);
     z-index: 999;
     position: fixed;
     top: 0;
     width: 100%;
+    box-shadow: 0 4px 20px var(--shadow-medium);
+    border-bottom: 3px solid var(--quaternary-color);
   
     @media (max-width: 1500px) {
       padding: 14px 15px;
@@ -15,6 +15,12 @@ header {
   
     .logo {
       margin-top: 0;
+      filter: brightness(1.2);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
     }
 
     nav {
@@ -31,15 +37,17 @@ header {
             position: relative;
       
             a {
-              color: #fff;
+              color: var(--white);
               text-decoration: none;
               font-size: 17px;
               font-weight: 600;
               padding: 0.5rem 1rem;
+              border-radius: 8px;
+              transition: all 0.3s ease;
       
               &:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-                border-radius: 4px;
+                background-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-1px);
               }
             }
       
@@ -50,18 +58,19 @@ header {
               position: absolute;
               top: 100%;
               left: 0;
-              background-color: #fff;
-              border-radius: 4px;
-              box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+              background-color: var(--white);
+              border-radius: 12px;
+              box-shadow: 0 8px 30px var(--shadow-medium);
+              border: 1px solid rgba(255, 184, 224, 0.3);
               z-index: 1000;
-              padding: 0.5rem;
+              padding: 8px;
               opacity: 0;
               transform: translateY(-10px); // Slide up when hidden
               transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s; // Add delay to visibility
       
               li {
                 position: relative;
-                margin-bottom: 8px;
+                margin-bottom: 4px;
       
                 &:last-child {
                   margin-bottom: 0;
@@ -69,13 +78,16 @@ header {
       
                 .dropdown-item {
                   display: block;
-                  padding: 0.5rem 1rem;
+                  padding: 8px 12px;
                   font-size: 0.9rem;
-                  color: #000;
+                  color: var(--text-dark);
                   text-decoration: none;
+                  border-radius: 8px;
+                  transition: all 0.3s ease;
       
                   &:hover {
-                    background-color: rgba(0, 0, 0, 0.05);
+                    background-color: var(--primary-color);
+                    color: var(--quaternary-color);
                   }
                 }
       
@@ -87,20 +99,21 @@ header {
                   top: 0;
                   left: 100%; // Position nested dropdown to the right
                   margin-left: 0.5rem;
-                  background-color: #f0f8ff; // Different background for nested submenus
-                  border-radius: 4px;
-                  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                  background-color: var(--primary-color);
+                  border-radius: 12px;
+                  box-shadow: 0 8px 30px var(--shadow-medium);
                   opacity: 0;
                   transform: translateY(-10px);
                   transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s linear 0.3s;
       
                   // Sub-dropdown items
                   .dropdown-item {
-                    color: #333; // A different color for text in sub-dropdown
-                    font-weight: bold; // Make it stand out
+                    color: var(--text-dark);
+                    font-weight: 600;
       
                     &:hover {
-                      background-color: rgba(0, 0, 0, 0.1);
+                      background-color: var(--secondary-color);
+                      color: var(--white);
                     }
                   }
                 }
@@ -128,10 +141,6 @@ header {
   
     // Responsive styles
     @media (max-width: 768px) {
-    //   nav {
-    //     display: none; // Hide nav links for small screens
-    //   }
-  
       .dropdown-menu {
         position: static;
         box-shadow: none;
@@ -140,8 +149,6 @@ header {
     }
   }
   
-  // User dropdown menu styles
-
 .user-menu {
     position: relative;
   
@@ -150,20 +157,30 @@ header {
       height: 40px;
       border-radius: 50%;
       cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+      }
     }
   
     .dropdown-menu {
       min-width: 280px;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
+      padding: 16px;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px var(--shadow-medium);
+      background-color: var(--white);
+      border: 1px solid rgba(255, 184, 224, 0.3);
   
       .user-info {
         display: flex;
         align-items: center;
-        padding: 10px;
+        padding: 16px;
         text-align: left;
+        background: var(--primary-color);
+        border-radius: 12px;
+        margin-bottom: 12px;
   
         .user-info-img {
           width: 50px;
@@ -178,13 +195,14 @@ header {
             font-weight: 600;
             border-radius: 50%;
             margin-right: 10px;
-            color: #fff; 
+            color: var(--white);
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #021A53;
+            background: var(--gradient-secondary);
             font-size: 1.2em;
             text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(236, 127, 169, 0.3);
         }
 
         .user-details {
@@ -194,54 +212,54 @@ header {
           .user-name {
             font-weight: bold;
             font-size: 1rem;
-            color: #333;
+            color: var(--text-dark);
           }
   
           .user-email {
             font-size: 0.9rem;
-            color: #555;
+            color: var(--text-light);
           }
         }
       }
   
       .dropdown-item {
         font-size: 0.9rem;
-        color: #333;
-        padding: 4px 10px;
+        color: var(--text-dark);
+        padding: 8px 12px;
         text-decoration: none;
-        border-radius: 4px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
   
         &:hover {
-          background-color: rgba(0, 0, 0, 0.05);
+          background-color: var(--primary-color);
+          color: var(--quaternary-color);
         }
       }
   
       .sign-out {
-        color: #d9534f;
+        color: #DC2626;
         font-weight: 600;
+        margin-top: 8px;
+        border-top: 1px solid rgba(255, 184, 224, 0.3);
+        padding-top: 12px;
   
         &:hover {
-          background-color: rgba(217, 83, 79, 0.1);
+          background-color: rgba(220, 38, 38, 0.1);
+          color: #B91C1C;
         }
       }
-
     }
   }
   
-
-  // Responsive styling for user menu
   @media (max-width: 768px) {
     .user-menu .dropdown-menu {
-      min-width: 100%; // Dropdown spans full screen on mobile
+      min-width: 100%;
+      padding: 12px;
     }
   
     .user-menu .user-info,
     .user-menu .other-account {
-      padding: 8px;
+      padding: 12px;
     }
   }
-  
-  
-  
-
-  
