@@ -1,0 +1,119 @@
+@import "../../../assets/css/variable/variable";
+
+.sidebar {
+  min-height: 95vh;
+  width: 70px;
+  padding: 6px 14px;
+  z-index: 3;
+  background-color: #f5f8ff;
+  transition: all 0.5s ease;
+  position: fixed !important;
+  margin-top: 30px;
+  overflow-x: hidden;
+  left: 0;
+
+  &.open {
+    width: 250px;
+  }
+
+  .logo-details {
+    color: $color-white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    #btn {
+      position: absolute;
+      color: $color-navyblue;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      font-size: 25px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.5s ease;
+    }
+  }
+
+  ul.nav-list {
+    margin-left: -36px;
+    padding-bottom: 60px;
+
+    li {
+      margin: 4px 0;
+      list-style: none;
+
+      a {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        position: relative;
+        transition: all 0.5s ease;
+        z-index: 10;
+        gap: 3px;
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: 40%;
+          height: 100%;
+          transform: scaleX(0);
+          background-color: $color-light-blue;
+
+          border-radius: 3px;
+          transition: transform 0.3s ease-in-out;
+          transform-origin: left;
+          z-index: -1;
+        }
+
+        &:hover::after {
+          transform: scaleX(3);
+        }
+
+        .link-name {
+          color: $color-navyblue;
+          font-size: 15px;
+          font-weight: 600;
+          white-space: nowrap;
+          pointer-events: none;
+          opacity: 1;
+          transition: all 0.3s ease;
+          width: 100px;
+        }
+      }
+      i {
+        color: $color-navyblue;
+        height: 60px;
+        line-height: 60px;
+        font-size: 22px;
+        font-weight: 600px;
+        min-width: 57px;
+        text-align: center;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+}
+
+.tooltip {
+  position: fixed;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgb(0, 153, 255) 100%);  
+  color: $color-white; 
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar.closed .tooltip {
+  opacity: 1;
+  visibility: visible;
+}

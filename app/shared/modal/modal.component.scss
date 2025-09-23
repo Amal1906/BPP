@@ -1,0 +1,22 @@
+.card_confirm{
+    padding-bottom: 30px !important;
+    background-color: white;
+    .modal-content{
+        .modal_title{
+            background: linear-gradient(135deg, #1180FF 0%, #0F53BE 50.57%, #155EEF 100%);
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .modal_body{
+            p{
+                font-size: 16px;
+                margin-bottom: 20px;
+                padding: 0px 15px;
+            }
+        }
+        .modal_footer{
+            text-align: center;
+        }
+    }
+}

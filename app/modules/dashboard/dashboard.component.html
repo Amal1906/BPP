@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="loader-content">
+    <div class="filters mb-4">
+      <form class="row g-3 align-items-center justify-content-between">
+        
+        <!-- Client Selection Dropdown - Left Side -->
+        <div class="col-auto">
+          <mat-form-field appearance="outline" class="client-dropdown-enhanced">
+            <mat-label>Select Client</mat-label>
+            <mat-select [(value)]="selectedProject" panelClass="client-select-panel" (selectionChange)="onClientChange()">
+              <mat-option *ngFor="let project of projects" [value]="project">
+                <mat-icon class="client-icon">business</mat-icon>
+                {{project}}
+              </mat-option>
+            </mat-select>
+            <mat-icon matSuffix class="dropdown-icon">account_balance</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Date Filter - Right Side -->
+        <div class="col-auto align-items-center d-flex">
+          <div *ngIf="startDateCtrl.value || endDateCtrl.value" class="me-2" matTooltip="Clear" style="cursor: pointer;"
+            (click)="clearDateRange()" title="Clear Date Range">
+            <span class="task-filter">
+              <mat-icon>clear</mat-icon>
+            </span>
+          </div>
+          <mat-form-field class="w-100">
+            <mat-label>Select a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+              <input matStartDate [formControl]="startDateCtrl" placeholder="Start date" readonly>
+              <input matEndDate [formControl]="endDateCtrl" placeholder="End date" readonly>
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker (closed)="fetchDashboardData()" disabled="false"></mat-date-range-picker>
+            <mat-error *ngIf="isInvalidDateRange">
+              Both start and end dates are required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+
+    <hr>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center my-4">
+      <mat-spinner></mat-spinner>
+      <p>Loading dashboard data...</p>
+    </div>
+
+    <!-- Dashboard Tiles -->
+    <div class="dashboard" *ngIf="!loading">
+      <mat-grid-list [cols]="gridCols" rowHeight="150px" gutterSize="1px">
+
+        <mat-grid-tile>
+          <mat-card class="big-card" (click)="goToDetails('Received')" style="cursor: pointer;">
+            <mat-card-title>
+              <img src="./assets/images/code-pull-request (1).png" alt="Received" class="card-icon" />
+              Received
+            </mat-card-title>
+            <mat-card-content>{{receivedCount}}</mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-card class="big-card" (click)="goToDetails('Policy_Checking')" style="cursor: pointer;">
+            <mat-card-title>
+              <img src="./assets/images/clipboard.png" alt="Policy_Checking" class="card-icon" />
+              Policy Checking
+            </mat-card-title>
+            <mat-card-content>{{policyCheckCount}}</mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-card class="big-card" (click)="goToDetails('COI')" style="cursor: pointer;">
+            <mat-card-title>
+              <img src="./assets/images/clipboard.png" alt="COI" class="card-icon" />
+              COI
+            </mat-card-title>
+            <mat-card-content>{{coiCount}}</mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-card class="big-card" (click)="goToDetails('Carrier_Download')" style="cursor: pointer;">
+            <mat-card-title>
+              <img src="./assets/images/clipboard.png" alt="Carrier_Download" class="card-icon" />
+              Carrier Download
+            </mat-card-title>
+            <mat-card-content>{{carrierDownload}}</mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-card class="big-card" (click)="goToDetails('New_Renewal')" style="cursor: pointer;">
+            <mat-card-title>
+              <img src="./assets/images/checked.png" alt="New_Renewal" class="card-icon" />
+              New Renewal
+            </mat-card-title>
+            <mat-card-content>{{newRenewalCount}}</mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+    </div>
+  </div>
+</div>
