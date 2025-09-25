@@ -1,4 +1,9 @@
 <div class="container-fluid">
+  <!-- Catalyst Library -->
+  <div class="float-start" *ngIf="pathName.includes('/layout/catalyst-library')">
+    <h1 class="mainline">Agentic Automation Management Console</h1>
+  </div>
+
   <!-- Dashboard -->
   <div class="float-start" *ngIf="pathName.includes('/layout/dashboard') || pathName === '/layout'">
     <h1 class="mainline">Automation Dashboard</h1>

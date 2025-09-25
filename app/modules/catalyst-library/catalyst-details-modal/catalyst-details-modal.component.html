@@ -1,0 +1,52 @@
+<div class="catalyst-modal-container">
+  <div class="modal-header" [style.background]="data.color">
+    <h2 class="modal-title">{{ data.title }}</h2>
+    <button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <div class="content-section">
+      <h3 class="section-title">
+        <mat-icon>settings</mat-icon>
+        How It Works
+      </h3>
+      <p class="section-description">{{ data.description }}</p>
+      
+      <div class="features-grid">
+        <div class="feature-item" *ngFor="let detail of data.details; let i = index">
+          <div class="feature-number">{{ i + 1 }}</div>
+          <span class="feature-text">{{ detail }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="business-impact-section">
+      <h3 class="section-title">
+        <mat-icon>trending_up</mat-icon>
+        Business Impact
+      </h3>
+      <div class="impact-grid">
+        <div class="impact-card" *ngFor="let impact of data.businessImpact">
+          <mat-icon class="impact-icon">check_circle</mat-icon>
+          <span>{{ impact }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="media-section">
+      <h3 class="section-title">
+        <mat-icon>play_circle_filled</mat-icon>
+        Demo & Workflow
+      </h3>
+      <div class="media-placeholder">
+        <div class="video-placeholder">
+          <mat-icon class="play-icon">play_circle_filled</mat-icon>
+          <p>{{ data.videoPlaceholder }}</p>
+          <span class="placeholder-text">Video/Image/Workflow will be placed here</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -34,6 +34,13 @@ const routes: Routes = [
             (m) => m.DashboardModule
           ),
       },
+      {
+        path: 'catalyst-library',
+        loadChildren: () =>
+          import('../modules/catalyst-library/catalyst-library.module').then(
+            (m) => m.CatalystLibraryModule
+          ),
+      },
     ]
   },
 ];

@@ -27,6 +27,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     public pathName: string = '';
   
     menuItems = [
+    { route: 'catalyst-library', name: 'Catalyst Library', icon: 'pi pi-book', tooltip: 'Catalyst Library', type: 'icon' },
     { route: 'dashboard', name: 'Dashboard', icon: 'pi pi-th-large', tooltip: 'Dashboard', type: 'icon' },
     { route: 'details', name: 'Details', icon: 'pi pi-list', tooltip: 'Details', type: 'icon' },
    { route: 'trigger', name: 'Trigger', icon: 'pi pi-bolt', tooltip: 'Trigger', type: 'image' }
@@ -63,6 +64,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
      */
     public redirectToOtherPage(routeName: string) {
       let targetRoute = '';
+      if(routeName == 'catalyst-library') {
+          targetRoute = '/layout/catalyst-library';
+      }
       if(routeName == 'dashboard') {
           targetRoute = '/layout/dashboard';
       }

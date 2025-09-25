@@ -46,6 +46,9 @@ export class SubHeaderComponent implements OnInit {
 
 
   private updatePageTitle(): void {
+    if (this.pathName.includes('/layout/catalyst-library')) {
+      this.pageTitle = 'Agentic Automation Management Console';
+    } else 
     if (this.pathName === '/layout' || this.pathName === '/layout/dashboard') {
       this.pageTitle = 'Automation Dashboard';
     } else if (this.pathName.includes('/layout/details')) {
