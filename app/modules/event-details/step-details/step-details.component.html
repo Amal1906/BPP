@@ -1,0 +1,102 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<div class="modern-step-details-page">
+  <div class="step-details-header modern-card">
+    <div class="header-actions">
+      <button class="action-btn-modern back-btn" title="Back" (click)="navigateBack()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Back</span>
+      </button>
+      <button class="action-btn-modern refresh-btn" title="Refresh" (click)="onRefresh()">
+        <mat-icon>refresh</mat-icon>
+        <span>Refresh</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="stepper-section">
+    <app-stepper [workFlow]="workFlow" [loading]="isLoading"></app-stepper>
+  </div>
+
+  <div class="step-details-content modern-card">
+    <div class="content-header">
+      <h3>Process Step Details</h3>
+      <p>Detailed breakdown of each step in the automation process</p>
+    </div>
+    
+    <div class="table-container">
+      <div class="modern-table-wrapper">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>
+                <div class="th-content">
+                  <mat-icon>label</mat-icon>
+                  Step Name
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>schedule</mat-icon>
+                  Process Time
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>info</mat-icon>
+                  Status
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>comment</mat-icon>
+                  Comments
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let step of steps; let i = index" class="table-row" [class.even]="i % 2 === 0">
+              <td class="step-name-cell">
+                <div class="step-info">
+                  <div class="step-number">{{ i + 1 }}</div>
+                  <span>{{ step.step_name || 'No step name' }}</span>
+                </div>
+              </td>
+              <td class="time-cell">
+                <div class="time-info">
+                  <mat-icon>access_time</mat-icon>
+                  <span>{{
+                    step.process_time
+                      ? (step.process_time | formatDateTime : "MM-dd-yyyy, HH:mm:ss")
+                      : "Not processed"
+                  }}</span>
+                </div>
+              </td>
+              <td class="status-cell">
+                <div class="modern-status-badge"
+                     [ngClass]="getStatusBadge(step.step_status).statusClass">
+                  <mat-icon>{{ getStatusIcon(step.step_status) }}</mat-icon>
+                  <span>{{ getStatusBadge(step.step_status).statusText }}</span>
+                </div>
+              </td>
+              <td class="comments-cell">
+                <div class="comment-content">
+                  {{ step.comments || 'No comments available' }}
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="steps.length === 0" class="empty-row">
+              <td colspan="4">
+                <div class="empty-state">
+                  <mat-icon>info_outline</mat-icon>
+                  <span>No step details available</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

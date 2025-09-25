@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <!-- Dashboard -->
+  <div class="float-start" *ngIf="pathName.includes('/layout/dashboard') || pathName === '/layout'">
+    <h1 class="mainline">Automation Dashboard</h1>
+  </div>
+
+  <!-- Process Step Details -->
+  <div class="float-start" *ngIf="pathName.includes('/layout/details/step-details')">
+    <h1 class="mainline">Transaction Details</h1>
+  </div>
+
+  <!-- Event Details -->
+  <div class="float-start" *ngIf="pathName.startsWith('/layout/details') && !pathName.includes('/layout/details/step-details')">
+    <h1 class="mainline">Transaction Dashboard</h1>
+  </div>
+
+  <!-- Trigger -->
+  <div class="float-start" *ngIf="pathName.includes('/layout/trigger')">
+    <h1 class="mainline">Automation Trigger</h1>
+  </div>
+</div>

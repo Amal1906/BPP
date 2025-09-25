@@ -1,0 +1,14 @@
+<div class="custom_modal  card_confirm">
+  <div class="modal-content">
+    <div  class="modal_title">
+      <h2 style="color: white !important;">{{modalTitle}}</h2>
+    </div>
+    <div class="modal_body" mat-dialog-content>
+      <p>{{modalBody}}</p>
+    </div><br>
+    <div class="modal_footer">
+            <button type="button" class="btn btn-light back-button btn-outline color-white btn-custom color-white" (click)="onCancel()"
+            [innerText]="(modalName === 'session_expired') ? 'Close' : 'Cancel'">
+          </button>
+    </div>
+  </div>
