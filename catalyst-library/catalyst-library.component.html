@@ -42,44 +42,85 @@
 
             <!-- Expanded Details - shown only for this specific catalyst -->
             <div class="catalyst-details" *ngIf="catalyst.showDetails">
-              <!-- Container for side-by-side layout -->
-              <div class="details-business-container">
-                <div class="details-section">
-                  <h4>Key Features:</h4>
-                  <ul class="details-list">
-                    <li *ngFor="let detail of catalyst.details">{{ detail }}</li>
-                  </ul>
+              <!-- Modern Details Container -->
+              <div class="modern-details-container">
+                <!-- Key Features Section -->
+                <div class="modern-section key-features-section">
+                  <div class="section-header">
+                    <div class="section-icon">
+                      <mat-icon>settings</mat-icon>
+                    </div>
+                    <h4 class="section-title">Key Features</h4>
+                    <div class="section-line"></div>
+                  </div>
+                  <div class="features-container">
+                    <div class="feature-card" *ngFor="let detail of catalyst.details; let i = index">
+                      <div class="feature-number">{{ i + 1 }}</div>
+                      <div class="feature-content">
+                        <p class="feature-text">{{ detail }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <!-- Extra spacing for Key Features section -->
-                <div class="policy-check-features-spacing" *ngIf="catalyst.id === 'policy-check'"></div>
-                <div class="coi-features-spacing" *ngIf="catalyst.id === 'coi'"></div>
-                <div class="carrier-download-features-spacing" *ngIf="catalyst.id === 'carrier-download'"></div>
-                <div class="renewal-features-spacing" *ngIf="catalyst.id === 'renewal'"></div>
+                <!-- Spacing Control -->
+                <div class="section-spacing" [ngClass]="'spacing-' + catalyst.id + '-features'"></div>
 
-                <!-- Extra spacing for Business Impact section -->
-                <div class="policy-check-spacing" *ngIf="catalyst.id === 'policy-check'"></div>
-                <div class="coi-spacing" *ngIf="catalyst.id === 'coi'"></div>
-                <div class="carrier-download-spacing" *ngIf="catalyst.id === 'carrier-download'"></div>
-                <div class="renewal-spacing" *ngIf="catalyst.id === 'renewal'"></div>
-
-                <div class="business-impact-section">
-                  <h4>Business Impact:</h4>
-                  <ul class="impact-list">
-                    <li *ngFor="let impact of catalyst.businessImpact" class="impact-item">
-                      <mat-icon class="impact-icon">trending_up</mat-icon>
-                      <span>{{ impact }}</span>
-                    </li>
-                  </ul>
+                <!-- Business Impact Section -->
+                <div class="modern-section business-impact-section">
+                  <div class="section-header">
+                    <div class="section-icon impact-icon">
+                      <mat-icon>trending_up</mat-icon>
+                    </div>
+                    <h4 class="section-title">Business Impact</h4>
+                    <div class="section-line impact-line"></div>
+                  </div>
+                  <div class="impact-container">
+                    <div class="impact-card" *ngFor="let impact of catalyst.businessImpact">
+                      <div class="impact-indicator">
+                        <mat-icon>check_circle</mat-icon>
+                      </div>
+                      <div class="impact-content">
+                        <p class="impact-text">{{ impact }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                <!-- Spacing Control -->
+                <div class="section-spacing" [ngClass]="'spacing-' + catalyst.id + '-impact'"></div>
               </div>
-              
-              <!-- Extra line/space after business impact -->
-              <div class="extra-spacing"></div>
             </div>
 
             <!-- See How It Works Button - appears below expanded details -->
-            <button class="see-how-btn" (click)="openCatalystModal(catalyst)" *ngIf="catalyst.showDetails">
+            <button class="modern-see-how-btn" (click)="openCatalystModal(catalyst)" *ngIf="catalyst.showDetails">
+              <div class="btn-content">
+                <div class="btn-icon">
+                  <mat-icon>play_circle_filled</mat-icon>
+                </div>
+                <span class="btn-text">See how it works</span>
+                <div class="btn-arrow">
+                  <mat-icon>arrow_forward</mat-icon>
+                </div>
+              </div>
+              <div class="btn-glow"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Global Collapse Button - appears when any catalyst is expanded -->
+      <div class="collapse-section" *ngIf="showDetails">
+        <button class="modern-collapse-btn" (click)="collapseAllDetails()">
+          <div class="collapse-content">
+            <mat-icon>expand_less</mat-icon>
+            <span>Show Less</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
               <mat-icon>play_circle_filled</mat-icon>
               <span>See how it works</span>
             </button>

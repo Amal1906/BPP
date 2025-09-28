@@ -228,126 +228,362 @@
 .catalyst-details {
   margin-top: 20px;
   animation: slideDown 0.3s ease;
-  // Ensure consistent height for details section
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+}
 
-  .details-section, .business-impact-section {
-    margin-bottom: 20px;
-    // Fixed minimum heights for consistent alignment
-    &.details-section {
-      min-height: 120px; // Minimum height for key features section
-    }
-    
-    &.business-impact-section {
-      min-height: 80px; // Minimum height for business impact section
-    }
+/* Modern Details Container */
+.modern-details-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 
-    h4 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      // Fixed height for section headers
-      height: 24px;
-
-      &::before {
-        content: '';
-        width: 4px;
-        height: 16px;
-        background: var(--tertiary-color);
-        border-radius: 2px;
-      }
-    }
-
-    .details-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text-light);
-        margin-bottom: 8px;
-        padding-left: 20px;
-        position: relative;
-        line-height: 1.4;
-
-        &::before {
-          content: '→';
-          color: var(--tertiary-color);
-          font-weight: bold;
-          position: absolute;
-          left: 0;
-        }
-      }
-    }
-
-    .impact-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      .impact-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--success);
-        margin-bottom: 8px;
-        padding: 8px 12px;
-        background: rgba(72, 187, 120, 0.1);
-        border-radius: 8px;
-        border-left: 3px solid var(--success);
-        // Fixed height for impact items
-        min-height: 40px;
-
-        .impact-icon {
-          font-size: 16px;
-          color: var(--success);
-        }
-      }
-    }
-  }
-
-  // See How It Works Button should be at the bottom
-  .see-how-btn {
-    margin-top: auto;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #5245e4 0%, #667eea 50%, #764ba2 100%);
+    opacity: 0.8;
   }
 }
 
-/* See How It Works Button */
-.see-how-btn {
+/* Modern Section Styling */
+.modern-section {
+  margin-bottom: 24px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #5245e4 0%, #667eea 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    box-shadow: 0 4px 12px rgba(82, 69, 228, 0.3);
+    
+    mat-icon {
+      color: white;
+      font-size: 18px;
+    }
+  }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+    margin-right: 16px;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(82, 69, 228, 0.3) 0%, transparent 100%);
+    border-radius: 1px;
+  }
+}
+
+/* Business Impact Section Icon */
+.business-impact-section .section-header {
+  .section-icon.impact-icon {
+    background: linear-gradient(135deg, #48BB78 0%, #38A169 100%);
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+  }
+  
+  .section-line.impact-line {
+    background: linear-gradient(90deg, rgba(72, 187, 120, 0.3) 0%, transparent 100%);
+  }
+}
+
+/* Features Container */
+.features-container {
+  display: grid;
+  gap: 12px;
+}
+
+/* Feature Card */
+.feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(135deg, #5245e4 0%, #667eea 100%);
+    opacity: 0.7;
+  }
+
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(82, 69, 228, 0.15);
+    border-color: rgba(82, 69, 228, 0.3);
+    
+    &::before {
+      opacity: 1;
+      width: 4px;
+    }
+  }
+}
+
+.feature-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #5245e4 0%, #667eea 100%);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 14px 20px;
-  background: #5245e4;
-  border: none;
-  border-radius: 10px;
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(82, 69, 228, 0.3);
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+.feature-content {
+  flex: 1;
+  
+  .feature-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+/* Impact Container */
+.impact-container {
+  display: grid;
+  gap: 12px;
+}
+
+/* Impact Card */
+.impact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(72, 187, 120, 0.08) 0%, rgba(56, 161, 105, 0.08) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(72, 187, 120, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(135deg, #48BB78 0%, #38A169 100%);
+    opacity: 0.7;
   }
 
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(72, 187, 120, 0.15);
+    border-color: rgba(72, 187, 120, 0.4);
+    
+    &::before {
+      opacity: 1;
+      width: 4px;
+    }
+  }
+}
+
+.impact-indicator {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #48BB78 0%, #38A169 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+  
   mat-icon {
-    font-size: 20px;
+    font-size: 16px;
+  }
+}
+
+.impact-content {
+  flex: 1;
+  
+  .impact-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--success);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+/* Section Spacing Controls */
+.section-spacing {
+  &.spacing-policy-check-features { height: 20px; }
+  &.spacing-coi-features { height: 24px; }
+  &.spacing-carrier-download-features { height: 20px; }
+  &.spacing-renewal-features { height: 16px; }
+  
+  &.spacing-policy-check-impact { height: 16px; }
+  &.spacing-coi-impact { height: 20px; }
+  &.spacing-carrier-download-impact { height: 18px; }
+  &.spacing-renewal-impact { height: 14px; }
+}
+
+/* Modern See How It Works Button */
+.modern-see-how-btn {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  margin-top: 20px;
+  overflow: hidden;
+
+  .btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #5245e4 0%, #667eea 50%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    
+    .btn-icon, .btn-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+    
+    .btn-text {
+      font-size: 14px;
+      font-weight: 600;
+      flex: 1;
+    }
+    
+    .btn-arrow {
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #5245e4 0%, #667eea 50%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 12px;
+    filter: blur(8px);
+    z-index: 1;
+  }
+
+  &:hover {
+    .btn-content {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(82, 69, 228, 0.4);
+      
+      .btn-arrow {
+        transform: translateX(4px);
+      }
+    }
+    
+    .btn-glow {
+      opacity: 0.3;
+    }
+  }
+}
+
+/* Modern Collapse Button */
+.modern-collapse-btn {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 25px;
+  overflow: hidden;
+
+  .collapse-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+    border: 2px solid #5245e4;
+    border-radius: 25px;
+    color: #5245e4;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    
+    mat-icon {
+      font-size: 18px;
+    }
+  }
+
+  &:hover {
+    .collapse-content {
+      background: linear-gradient(135deg, #5245e4 0%, #667eea 100%);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(82, 69, 228, 0.3);
+    }
   }
 }
 
@@ -355,33 +591,6 @@
 .collapse-section {
   text-align: center;
   margin-top: 40px;
-
-  .collapse-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 30px;
-    background: var(--white);
-    border: 2px solid #5245e4;
-    border-radius: 25px;
-    color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 auto;
-
-    &:hover {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    mat-icon {
-      font-size: 18px;
-    }
-  }
 }
 
 /* Animations */
@@ -436,30 +645,85 @@
     gap: 20px;
   }
 
-  // Remove fixed heights on mobile for better responsiveness
   .catalyst-card {
-    min-height: auto;
-    
-    &.details-expanded {
-      min-height: auto;
-    }
-    
     .card-header {
-      min-height: auto;
+      min-height: 60px;
+      padding: 15px;
+      
+      .catalyst-title {
+        font-size: 16px;
+        padding: 10px 14px;
+      }
     }
     
     .card-content .catalyst-description {
-      min-height: auto;
-      -webkit-line-clamp: unset;
-      line-clamp: unset;
+      ul li {
+        font-size: 13px;
+      }
     }
   }
 
-  .catalyst-details {
-    .details-section, .business-impact-section {
-      &.details-section, &.business-impact-section {
-        min-height: auto;
+  .modern-details-container {
+    padding: 20px;
+    
+    .section-header {
+      .section-icon {
+        width: 32px;
+        height: 32px;
+        
+        mat-icon {
+          font-size: 16px;
+        }
       }
+      
+      .section-title {
+        font-size: 15px;
+      }
+    }
+    
+    .feature-card, .impact-card {
+      padding: 14px;
+      gap: 12px;
+      
+      .feature-text, .impact-text {
+        font-size: 13px;
+      }
+    }
+    
+    .feature-number, .impact-indicator {
+      width: 26px;
+      height: 26px;
+      
+      mat-icon {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  .modern-see-how-btn .btn-content {
+    padding: 14px 20px;
+    gap: 10px;
+    
+    .btn-text {
+      font-size: 13px;
+    }
+    
+    .btn-icon, .btn-arrow {
+      width: 20px;
+      height: 20px;
+      
+      mat-icon {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  .modern-collapse-btn .collapse-content {
+    padding: 10px 24px;
+    font-size: 13px;
+    
+    mat-icon {
+      font-size: 16px;
     }
   }
 
@@ -499,79 +763,72 @@
     font-size: 20px;
   }
 
-  .catalyst-card .card-header .catalyst-title {
-    font-size: 16px;
+  .catalyst-card .card-header {
+    min-height: 50px;
+    padding: 12px;
+    
+    .catalyst-title {
+      font-size: 15px;
+      padding: 8px 12px;
+    }
   }
-}
-
-.extra-spacing {
-  height: 20px; 
-}
-
-/* Spacing between sections inside expanded details */
-.policy-check-spacing {
-  height: 50px; 
-}
-
-.coi-spacing {
-  height: 75px; 
-}
-
-.carrier-download-spacing {
-  height: 75px; 
-}
-
-.renewal-spacing {
-  height: 20px; 
-}
-
-/* Spacing after Key Features sections */
-.policy-check-features-spacing {
-  height: 30px;
-}
-
-.coi-features-spacing {
-  height: 40px;
-}
-
-.carrier-download-features-spacing {
-  height: 25px;
-}
-
-.renewal-features-spacing {
-  height: 15px;
-}
-
-/* Individual height controls for Key Features sections */
-.catalyst-card[data-catalyst-id="policy-check"] .details-section {
-  min-height: 100px; /* Height for Policy Check Key Features */
-}
-
-.catalyst-card[data-catalyst-id="coi"] .details-section {
-  min-height: 120px; /* Height for COI Key Features */
-}
-
-.catalyst-card[data-catalyst-id="carrier-download"] .details-section {
-  min-height: 110px; /* Height for Carrier Download Key Features */
-}
-
-.catalyst-card[data-catalyst-id="renewal"] .details-section {
-  min-height: 130px; /* Height for Renewal Key Features */
-}
-
-/* Individual height controls for Business Impact sections */
-.catalyst-card[data-catalyst-id="policy-check"] .business-impact-section {
-  min-height: 70px; /* Height for Policy Check Business Impact */
-}
-
-.catalyst-card[data-catalyst-id="coi"] .business-impact-section {
-  min-height: 80px; /* Height for COI Business Impact */
-}
-
-.catalyst-card[data-catalyst-id="carrier-download"] .business-impact-section {
-  min-height: 85px; /* Height for Carrier Download Business Impact */
-}
-
-.catalyst-card[data-catalyst-id="renewal"] .business-impact-section {
-  min-height: 75px; /* Height for Renewal Business Impact */
+  
+  .modern-details-container {
+    padding: 16px;
+    
+    .section-header {
+      margin-bottom: 12px;
+      
+      .section-icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+        
+        mat-icon {
+          font-size: 14px;
+        }
+      }
+      
+      .section-title {
+        font-size: 14px;
+        margin-right: 12px;
+      }
+    }
+    
+    .feature-card, .impact-card {
+      padding: 12px;
+      gap: 10px;
+      
+      .feature-text, .impact-text {
+        font-size: 12px;
+      }
+    }
+    
+    .feature-number, .impact-indicator {
+      width: 24px;
+      height: 24px;
+      
+      mat-icon {
+        font-size: 12px;
+      }
+    }
+  }
+  
+  .modern-see-how-btn .btn-content {
+    padding: 12px 18px;
+    gap: 8px;
+    
+    .btn-text {
+      font-size: 12px;
+    }
+    
+    .btn-icon, .btn-arrow {
+      width: 18px;
+      height: 18px;
+      
+      mat-icon {
+        font-size: 16px;
+      }
+    }
+  }
 }
