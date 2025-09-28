@@ -17,10 +17,6 @@
   text-align: center;
   margin-bottom: 60px;
   padding: 50px 20px;
-  //background: linear-gradient(135deg, rgba(255, 237, 250, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
-  //border-radius: 20px;
-  //box-shadow: 0 4px 20px var(--shadow-light);
-  //border: 1px solid rgba(255, 184, 224, 0.3);
 
   .main-title {
     font-size: 42px;
@@ -99,7 +95,6 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
-  // Change alignment to prevent stretching when one card expands
   align-items: start;
 }
 
@@ -114,8 +109,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  // Remove fixed heights to prevent stretching other cards
-  // Each card will only grow based on its own content
 
   &:hover {
     transform: translateY(-5px);
@@ -127,12 +120,10 @@
     text-align: center;
     position: relative;
     background: white;
-    // Fixed height for consistent alignment
     min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    // Add separator line at the bottom
     border-bottom: 2px solid #f1f5f9;
     margin-bottom: 0;
 
@@ -142,10 +133,8 @@
       font-weight: 700;
       margin: 0;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      /* Add small border box around title */
       display: inline-block;
       padding: 12px 16px;
-      //border: 2px solid #5245e4;
       border-radius: 6px;
       background: #ffffff;
     }
@@ -163,7 +152,6 @@
       color: var(--text-dark);
       line-height: 1.6;
       margin-bottom: 20px;
-      // Remove line-clamp restrictions to show all description content
       min-height: auto;
       
       ul {
@@ -194,7 +182,7 @@
   }
 }
 
-/* Know More Button - Updated to #5245e4 color */
+/* Know More Button */
 .know-more-btn {
   display: flex;
   align-items: center;
@@ -214,7 +202,7 @@
   margin-top: auto;
 
   &:hover {
-    background: #5245e4;
+    background: #4338ca;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(82, 69, 228, 0.4);
   }

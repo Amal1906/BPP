@@ -90,21 +90,21 @@
                 <!-- Spacing Control -->
                 <div class="section-spacing" [ngClass]="'spacing-' + catalyst.id + '-impact'"></div>
               </div>
-            </div>
 
-            <!-- See How It Works Button - appears below expanded details -->
-            <button class="modern-see-how-btn" (click)="openCatalystModal(catalyst)" *ngIf="catalyst.showDetails">
-              <div class="btn-content">
-                <div class="btn-icon">
-                  <mat-icon>play_circle_filled</mat-icon>
+              <!-- See How It Works Button - appears below expanded details -->
+              <button class="modern-see-how-btn" (click)="openCatalystModal(catalyst)">
+                <div class="btn-content">
+                  <div class="btn-icon">
+                    <mat-icon>play_circle_filled</mat-icon>
+                  </div>
+                  <span class="btn-text">See how it works</span>
+                  <div class="btn-arrow">
+                    <mat-icon>arrow_forward</mat-icon>
+                  </div>
                 </div>
-                <span class="btn-text">See how it works</span>
-                <div class="btn-arrow">
-                  <mat-icon>arrow_forward</mat-icon>
-                </div>
-              </div>
-              <div class="btn-glow"></div>
-            </button>
+                <div class="btn-glow"></div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -116,23 +116,6 @@
             <mat-icon>expand_less</mat-icon>
             <span>Show Less</span>
           </div>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-              <mat-icon>play_circle_filled</mat-icon>
-              <span>See how it works</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Global Collapse Button - appears when any catalyst is expanded -->
-      <div class="collapse-section" *ngIf="showDetails">
-        <button class="collapse-btn" (click)="collapseAllDetails()">
-          <mat-icon>expand_less</mat-icon>
-          <span>Show Less</span>
         </button>
       </div>
     </div>
