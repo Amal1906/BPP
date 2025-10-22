@@ -1,0 +1,28 @@
+<div class="loader-content">
+  <!-- Loading message -->
+  <div *ngIf="loading && (!workFlow || workFlow.length === 0)" class="fs-4 d-flex justify-content-center">
+    <p style="font-size: 15px;">Loading Work Flow...</p>
+  </div>
+
+  <!-- Stepper -->
+  <div class="d-flex w-100 justify-content-center" *ngIf="workFlow && workFlow.length > 0">
+    <div class="stepper">
+     <div
+  *ngFor="let item of workFlow; index as i"
+  [ngClass]="['stepper__step', getStepClass(item)]"
+  [title]="item?.status_message || ''"
+>
+  <!-- Step Index -->
+  <span class="stepper__step__index">
+    {{ getStepIndex(item, i) }}
+  </span>
+
+  <!-- Step Label -->
+  <h6 class="stepper__step__label">
+    {{ item?.step || '-' }}
+  </h6>
+</div>
+
+    </div>
+  </div>
+</div>
