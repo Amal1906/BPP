@@ -27,10 +27,18 @@ export class StepDetailsComponent implements OnInit {
   isSubmitted: boolean = false;
   isLoading: boolean = false;
 
-  processRefId: string = ''; 
-  workItem: string = '';   
+  processRefId: string = '';
+  workItem: string = '';
   steps: any;
   sourceRefId: string = '';
+
+  showDocumentPopup: boolean = false;
+  documentList: string[] = [];
+  isEditMode: boolean = false;
+  availableDocuments: string[] = [];
+  selectedSourceDocument: string = '';
+  selectedTargetDocuments: string[] = [];
+  modelDestinationLob: string = '';
 
 
   constructor(
@@ -55,18 +63,30 @@ export class StepDetailsComponent implements OnInit {
       this.toastr.error('Work item is missing.');
       return;
     }
-    
+
     this.isLoading = true;
-    
+
     this.dataService.getDocumentAnalysis(this.processRefId, stepName, this.workItem, this.sourceRefId).subscribe({
       next: (response: any) => {
         this.isLoading = false;
         console.log('Document Analysis Response:', response);
-        
+
         if (response && response.status === 'success') {
-          this.toastr.success('Document analysis data fetched successfully.');
+          if (response.data && Array.isArray(response.data)) {
+            this.documentList = response.data;
+          } else if (response.data) {
+            this.documentList = [response.data];
+          } else {
+            this.documentList = [];
+          }
+          this.showDocumentPopup = true;
         } else if (response && response.data) {
-          this.toastr.success('Document analysis data retrieved.');
+          if (Array.isArray(response.data)) {
+            this.documentList = response.data;
+          } else {
+            this.documentList = [response.data];
+          }
+          this.showDocumentPopup = true;
         } else {
           this.toastr.warning('No document analysis data available.');
         }
@@ -74,7 +94,7 @@ export class StepDetailsComponent implements OnInit {
       error: (error: any) => {
         this.isLoading = false;
         console.error('Error fetching document analysis:', error);
-        
+
         if (error.status === 404) {
           this.toastr.error('Document analysis data not found.');
         } else if (error.status === 500) {
@@ -82,6 +102,109 @@ export class StepDetailsComponent implements OnInit {
         } else {
           this.toastr.error('Failed to fetch document analysis data.');
         }
+      }
+    });
+  }
+
+  closeDocumentPopup() {
+    this.showDocumentPopup = false;
+    this.isEditMode = false;
+    this.availableDocuments = [];
+    this.selectedSourceDocument = '';
+    this.selectedTargetDocuments = [];
+  }
+
+  openEditMode() {
+    if (!this.sourceRefId) {
+      this.toastr.error('Source reference ID is missing.');
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.dataService.getDocsFilesForEdit(
+      this.sourceRefId,
+      this.modelDestinationLob || this.workItem,
+      this.workItem
+    ).subscribe({
+      next: (response: any) => {
+        this.isLoading = false;
+        console.log('Edit Docs Response:', response);
+
+        if (response && response.status === 'success' && response.data) {
+          if (Array.isArray(response.data)) {
+            this.availableDocuments = response.data;
+          } else {
+            this.availableDocuments = [response.data];
+          }
+          this.isEditMode = true;
+        } else if (response && response.data) {
+          if (Array.isArray(response.data)) {
+            this.availableDocuments = response.data;
+          } else {
+            this.availableDocuments = [response.data];
+          }
+          this.isEditMode = true;
+        } else {
+          this.toastr.warning('No documents available for editing.');
+        }
+      },
+      error: (error: any) => {
+        this.isLoading = false;
+        console.error('Error fetching edit documents:', error);
+        this.toastr.error('Failed to load documents for editing.');
+      }
+    });
+  }
+
+  addTargetDocument() {
+    this.selectedTargetDocuments.push('');
+  }
+
+  removeTargetDocument(index: number) {
+    this.selectedTargetDocuments.splice(index, 1);
+  }
+
+  saveDocumentChanges() {
+    if (!this.selectedSourceDocument) {
+      this.toastr.error('Please select a source document.');
+      return;
+    }
+
+    const validTargets = this.selectedTargetDocuments.filter(doc => doc && doc.trim() !== '');
+    if (validTargets.length === 0) {
+      this.toastr.error('Please select at least one target document.');
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.dataService.saveBaseTarget(
+      this.sourceRefId,
+      this.selectedSourceDocument,
+      validTargets,
+      this.workItem
+    ).subscribe({
+      next: (response: any) => {
+        this.isLoading = false;
+        console.log('Save Response:', response);
+
+        if (response && response.status === 'success') {
+          this.toastr.success('Documents saved successfully.');
+          this.isEditMode = false;
+          this.selectedSourceDocument = '';
+          this.selectedTargetDocuments = [];
+        } else {
+          this.toastr.success('Documents saved.');
+          this.isEditMode = false;
+          this.selectedSourceDocument = '';
+          this.selectedTargetDocuments = [];
+        }
+      },
+      error: (error: any) => {
+        this.isLoading = false;
+        console.error('Error saving documents:', error);
+        this.toastr.error('Failed to save document changes.');
       }
     });
   }
@@ -520,5 +643,9 @@ export class StepDetailsComponent implements OnInit {
 
   onRefresh() {
     this.loadSteps();
+  }
+
+  trackByIndex(index: number): number {
+    return index;
   }
 }

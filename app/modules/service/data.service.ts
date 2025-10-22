@@ -158,4 +158,43 @@ export class DataService {
     this.savedEndDate = null;
     this.savedClient = null;
   }
+
+  getDocsFilesForEdit(
+    sourceRefId: string,
+    modelDestinationLob: string,
+    requestType: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('sourceRefID', sourceRefId)
+      .set('model_destination_lob', modelDestinationLob)
+      .set('request_type', requestType);
+
+    return this.http.post(`display_docs_files/`, null, { params }).pipe(
+      catchError((error) => {
+        console.error('Error fetching docs files for edit:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  saveBaseTarget(
+    sourceRefId: string,
+    sourceDocument: string,
+    targetDocuments: string[],
+    requestType: string
+  ): Observable<any> {
+    const body = {
+      sourceRefID: sourceRefId,
+      source_document: sourceDocument,
+      target_documents: targetDocuments,
+      request_type: requestType
+    };
+
+    return this.http.post(`new_base_target/`, body).pipe(
+      catchError((error) => {
+        console.error('Error saving base target:', error);
+        return throwError(() => error);
+      })
+    );
+  }
 }

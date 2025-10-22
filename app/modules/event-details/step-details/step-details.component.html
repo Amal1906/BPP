@@ -125,4 +125,85 @@
       </div>
     </div>
   </div>
+
+  <div class="document-popup-overlay" *ngIf="showDocumentPopup" (click)="closeDocumentPopup()">
+    <div class="document-popup" (click)="$event.stopPropagation()">
+      <div class="popup-header">
+        <h3>{{ isEditMode ? 'Edit Documents' : 'Document List' }}</h3>
+        <button class="close-btn" (click)="closeDocumentPopup()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div class="popup-body">
+        <ng-container *ngIf="!isEditMode">
+          <div class="document-list-view">
+            <div class="document-item" *ngFor="let doc of documentList; let i = index">
+              <div class="doc-icon">
+                <mat-icon>description</mat-icon>
+              </div>
+              <span>{{ doc }}</span>
+            </div>
+            <div class="empty-state" *ngIf="documentList.length === 0">
+              <mat-icon>folder_open</mat-icon>
+              <p>No documents available</p>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="isEditMode">
+          <div class="edit-mode-content">
+            <div class="form-section">
+              <label class="form-label">Source Document</label>
+              <select class="form-select" [(ngModel)]="selectedSourceDocument">
+                <option value="">Select a source document</option>
+                <option *ngFor="let doc of availableDocuments" [value]="doc">{{ doc }}</option>
+              </select>
+            </div>
+
+            <div class="form-section">
+              <div class="label-with-action">
+                <label class="form-label">Target Documents</label>
+                <button class="add-target-btn" (click)="addTargetDocument()">
+                  <mat-icon>add</mat-icon>
+                  Add Target
+                </button>
+              </div>
+
+              <div class="target-documents-list">
+                <div class="target-item" *ngFor="let target of selectedTargetDocuments; let i = index; trackBy: trackByIndex">
+                  <select class="form-select" [(ngModel)]="selectedTargetDocuments[i]">
+                    <option value="">Select a target document</option>
+                    <option *ngFor="let doc of availableDocuments" [value]="doc">{{ doc }}</option>
+                  </select>
+                  <button class="remove-btn" (click)="removeTargetDocument(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+                <div class="empty-state-small" *ngIf="selectedTargetDocuments.length === 0">
+                  <p>Click "Add Target" to add target documents</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="popup-footer">
+        <button class="footer-btn close-footer-btn" (click)="closeDocumentPopup()">
+          <mat-icon>close</mat-icon>
+          Close
+        </button>
+        <button class="footer-btn edit-btn" *ngIf="!isEditMode" (click)="openEditMode()">
+          <mat-icon>edit</mat-icon>
+          Edit
+        </button>
+        <button class="footer-btn save-btn" *ngIf="isEditMode" (click)="saveDocumentChanges()">
+          <mat-icon>save</mat-icon>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
