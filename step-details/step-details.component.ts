@@ -190,12 +190,12 @@ export class StepDetailsComponent implements OnInit {
     // Initialize LOB with workItem
     this.modelDestinationLob = workItem.toUpperCase();
 
-    // Reset window state
-    this.isMaximized = false;
+    // Reset window state - open maximized
+    this.isMaximized = true;
     this.isMinimized = false;
     this.isDocsPanelCollapsed = false;
-    this.windowPosition = { x: 100, y: 100 };
-    this.windowSize = { width: 1200, height: 700 };
+    this.windowPosition = { x: 0, y: 0 };
+    this.windowSize = { width: window.innerWidth, height: window.innerHeight };
 
     // Initialize chat with welcome message
     this.chatMessages = [
